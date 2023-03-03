@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>Reaction Timer</h1>
-    <button @click="playing">Start</button>
+    <button @click="playing" v-show="!button1">Start</button>
+    <button @click="restart" v-show="button">Back To Start</button>
     <h1 v-if="playingStatus">You have started paying</h1>
     <BlockComp
       v-if="playingStatus"
@@ -24,6 +25,8 @@ export default {
     return {
       playingStatus: false,
       score: null,
+      button: false,
+      button1: false,
       win: false,
     };
   },
@@ -33,11 +36,17 @@ export default {
       this.delay = 2000 + Math.random() * 5000;
       console.log(this.delay);
       this.playingStatus = true;
+      this.button1 = true;
     },
     endGame(e) {
       this.score = e;
       this.playingStatus = false;
       this.win = true;
+      this.button = !this.button;
+    },
+    restart() {
+      this.win = false;
+      this.button = false;
     },
   },
 };
