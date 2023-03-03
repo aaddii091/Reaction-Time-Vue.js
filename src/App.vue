@@ -46,6 +46,7 @@ export default {
     },
     restart() {
       this.win = false;
+      this.button1 = false;
       this.button = false;
     },
   },
